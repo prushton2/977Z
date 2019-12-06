@@ -27,13 +27,13 @@ brain  Brain;
 vex::controller Controller1 = vex::controller();
 vex::vision Vision       = vex::vision( PORT8   );
 
-vex::motor LeftFront     = vex::motor(  PORT11  );
-vex::motor LeftMiddle    = vex::motor(  PORT12,  true );
-vex::motor LeftBack      = vex::motor(  PORT13   );
+vex::motor LeftFront     = vex::motor(  PORT11,  true);
+vex::motor LeftMiddle    = vex::motor(  PORT12,  false );
+vex::motor LeftBack      = vex::motor(  PORT13,  true );
 
-vex::motor RightFront    = vex::motor(  PORT18,  true );
-vex::motor RightMiddle   = vex::motor(  PORT19   );
-vex::motor RightBack     = vex::motor(  PORT20,  true );
+vex::motor RightFront    = vex::motor(  PORT18,  false );
+vex::motor RightMiddle   = vex::motor(  PORT19,  true );
+vex::motor RightBack     = vex::motor(  PORT20,  false );
 
 vex::motor LiftMotor     = vex::motor(  PORT10,  true );
 vex::motor IntakeMotor   = vex::motor(  PORT9    );
@@ -316,15 +316,15 @@ void usercontrol( void ) {
   while (1) {
     Vision.setLedColor(0, 0, 255);
 
-    Drive(Controller1.Axis3.value()*.70, 0);
-    Drive(Controller1.Axis2.value()*.70, 1);
+    Drive(Controller1.Axis3.value()*.60, 0);
+    Drive(Controller1.Axis2.value()*.60, 1);
 
     if(Controller1.ButtonR1.pressing()) {
       LiftMotor.spin(directionType::fwd, -100, velocityUnits::pct);
     } else if(Controller1.ButtonR2.pressing()) {
       LiftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
     } else {
-      LiftMotor.stop();
+      LiftMotor.stop(brakeType::brake);
     }
     if(Controller1.ButtonL1.pressing()) {
       IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
