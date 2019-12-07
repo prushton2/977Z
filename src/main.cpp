@@ -235,11 +235,14 @@ void trackColor() {
 void pre_auton( void ) {
   while(!competition().isEnabled() || true) {
     if(developer) {
+      Brain.Screen.clearScreen();
+      Brain.Screen.print("Autonomous selection is disabled in dev mode");
+      Brain.Screen.newLine();
       auton = 1;
     } else {
       swap();
-    }
-    render();  
+      render();
+    }  
   }
 }
 
