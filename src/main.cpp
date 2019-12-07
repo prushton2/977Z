@@ -245,7 +245,7 @@ void pre_auton( void ) {
 
 void autonomous( void ) {
   running = true;
-  task::sleep(500);
+  task::sleep(500);     
   Brain.Screen.clearScreen();
   Brain.Screen.setCursor(1, 1);
   switch (auton) {
@@ -269,7 +269,7 @@ void autonomous( void ) {
       task::sleep(100);
       MoveEn(.4 * 360, 10, true);
       task::sleep(100);
-      IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+      IntakeMotor.spin(directionType::fwd, -75, velocityUnits::pct);
       task::sleep(500);
       IntakeMotor.stop(brakeType::hold);
       task::sleep(100);
@@ -303,7 +303,7 @@ void autonomous( void ) {
       task::sleep(100);
       MoveEn(.4 * 360, 10, true);
       task::sleep(100);
-      IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+      IntakeMotor.spin(directionType::fwd, -75, velocityUnits::pct);
       task::sleep(500);
       IntakeMotor.stop(brakeType::hold);
       task::sleep(100);
