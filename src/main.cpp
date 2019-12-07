@@ -36,7 +36,7 @@ vex::motor RightMiddle   = vex::motor(  PORT19,  true );
 vex::motor RightBack     = vex::motor(  PORT20,  false );
 
 vex::motor LiftMotor     = vex::motor(  PORT10,  true );
-vex::motor IntakeMotor   = vex::motor(  PORT7    );
+vex::motor IntakeMotor   = vex::motor(  PORT4    );
 
 pot ArmPot = pot(Brain.ThreeWirePort.A);
 // A global instance of vex::competition
@@ -384,8 +384,8 @@ void usercontrol( void ) {
   while (1) {
     Vision.setLedColor(0, 0, 255);
 
-    Drive(Controller1.Axis3.value()*.60, 0);
-    Drive(Controller1.Axis2.value()*.60, 1);
+    Drive(Controller1.Axis3.value()*.65, 0);
+    Drive(Controller1.Axis2.value()*.65, 1);
 
     if(Controller1.ButtonR1.pressing()) {
       LiftMotor.spin(directionType::fwd, -100, velocityUnits::pct);
@@ -399,7 +399,7 @@ void usercontrol( void ) {
     } else if(Controller1.ButtonL2.pressing()) {
       IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
     } else {
-      IntakeMotor.stop(brakeType::hold);
+      IntakeMotor.stop();//brakeType::hold);
     }
 
     if (Controller1.ButtonRight.pressing() && developer) {
