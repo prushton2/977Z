@@ -36,7 +36,7 @@ vex::motor RightMiddle   = vex::motor(  PORT19,  true );
 vex::motor RightBack     = vex::motor(  PORT20,  false );
 
 vex::motor LiftMotor     = vex::motor(  PORT10,  true );
-vex::motor IntakeMotor   = vex::motor(  PORT9    );
+vex::motor IntakeMotor   = vex::motor(  PORT7    );
 
 pot ArmPot = pot(Brain.ThreeWirePort.A);
 // A global instance of vex::competition
@@ -78,13 +78,13 @@ void Drive(int speed, int side) {
 
 void Turn(int dir, int angle, int speed) {
   if(dir == 0) {
-    while(RightBack.rotation(rotationUnits::deg) <= angle*3) {
+    while(RightBack.rotation(rotationUnits::deg) <= angle*2.49) {
       Drive(-1*speed, 0);
       Drive(speed, 1); 
     }
     Drive(0, 2);
   } else if(dir == 1) {
-    while(LeftBack.rotation(rotationUnits::deg) <= angle*3) {
+    while(LeftBack.rotation(rotationUnits::deg) <= angle*2.49) {
       Drive(speed, 0);
       Drive(-1*speed, 1);
     }
@@ -96,11 +96,11 @@ bool MoveEn(double distance, int speed, bool autocorrect) {
   LeftBack.resetRotation();
   RightBack.resetRotation();
   while(LeftBack.rotation(rotationUnits::deg) <= distance) {
-    if (LeftBack.rotation(rotationUnits::deg) < RightBack.rotation(rotationUnits::deg) && autocorrect) {
+    if (LeftBack.rotation(rotationUnits::deg) > RightBack.rotation(rotationUnits::deg) && autocorrect) {
       Drive(speed, 0);
       Drive(speed + (speed/3), 1);
     }
-    else if (LeftBack.rotation(rotationUnits::deg) > RightBack.rotation(rotationUnits::deg) && autocorrect) {
+    else if (LeftBack.rotation(rotationUnits::deg) < RightBack.rotation(rotationUnits::deg) && autocorrect) {
       Drive(speed + (speed/3), 0);
       Drive(speed, 1);
     }
@@ -134,11 +134,11 @@ void render() {
     Brain.Screen.setCursor(6, 5);
     if (auton == 2) {Brain.Screen.setPenColor(color::purple);}
     else {Brain.Screen.setPenColor(color::blue);}
-    Brain.Screen.print("Near Autonomous");
+    Brain.Screen.print("Large Autonomous");
     Brain.Screen.setCursor(10, 5);
     if (auton == 4) {Brain.Screen.setPenColor(color::purple);}
     else {Brain.Screen.setPenColor(color::blue);}
-    Brain.Screen.print("Far Autonomous");
+    Brain.Screen.print("Small Autonomous");
     Brain.Screen.setPenColor(color::white);
     
     Brain.Screen.setPenColor(color::white);
@@ -154,11 +154,11 @@ void render() {
     Brain.Screen.setCursor(6, 30);
     if (auton == 3) {Brain.Screen.setPenColor(color::purple);}
     else {Brain.Screen.setPenColor(color::red);}
-    Brain.Screen.print("Near Autonomous");
+    Brain.Screen.print("Large Autonomous");
     Brain.Screen.setCursor(10, 30);
     if (auton == 5) {Brain.Screen.setPenColor(color::purple);}
     else {Brain.Screen.setPenColor(color::red);}
-    Brain.Screen.print("Far Autonomous");
+    Brain.Screen.print("Small Autonomous");
     Brain.Screen.setPenColor(color::white);
 }
 
@@ -246,45 +246,115 @@ void pre_auton( void ) {
 void autonomous( void ) {
   running = true;
   task::sleep(500);
+  Brain.Screen.clearScreen();
+  Brain.Screen.setCursor(1, 1);
   switch (auton) {
     case 0:
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1, 1);
       Brain.Screen.print("No Auton");
       break;
     case 1:
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1, 1);
       Brain.Screen.print("Testing Autonomous");
-
-      Turn(0, 90, 20);
-
+      IntakeMotor.stop(brakeType::hold);
+      MoveEn(.4* 360, 20, true);
+      task::sleep(100);
+      Turn(1, 91, 20);
+      task::sleep(100);
+      Drive(-20, 2);
+      task::sleep(900);
+      Drive(0, 2);
+      task::sleep(100);
+      MoveEn(2.3 * 360, 30, true);
+      task::sleep(100);
+      Turn(1, 97, 20);
+      task::sleep(100);
+      MoveEn(.4 * 360, 10, true);
+      task::sleep(100);
+      IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+      task::sleep(500);
+      IntakeMotor.stop(brakeType::hold);
+      task::sleep(100);
+      Turn(1, 150, 12);
+      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      task::sleep(100);
+      IntakeMotor.stop(brakeType::hold);
+      MoveEn(2.7 * 360, 25, true);
+      task::sleep(100);
+      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      Drive(-50, 2);
+      task::sleep(1500);
+      Drive(0, 2);
+      IntakeMotor.stop();
       break;
     case 2:
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1, 1);
       Brain.Screen.print("Near Blue");
 
-      MoveEn(1.5*360, 20, true);
-      Drive(-70, 2);
-      task::sleep(1000);
+      IntakeMotor.stop(brakeType::hold);
+      MoveEn(.4* 360, 20, true);
+      task::sleep(100);
+      Turn(0, 91, 20);
+      task::sleep(100);
+      Drive(-20, 2);
+      task::sleep(900);
       Drive(0, 2);
+      task::sleep(100);
+      MoveEn(2.3 * 360, 30, true);
+      task::sleep(100);
+      Turn(0, 97, 20);
+      task::sleep(100);
+      MoveEn(.4 * 360, 10, true);
+      task::sleep(100);
+      IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+      task::sleep(500);
+      IntakeMotor.stop(brakeType::hold);
+      task::sleep(100);
+      Turn(0, 150, 12);
+      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      task::sleep(100);
+      IntakeMotor.stop(brakeType::hold);
+      MoveEn(2.7 * 360, 25, true);
+      task::sleep(100);
+      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      Drive(-50, 2);
+      task::sleep(1500);
+      Drive(0, 2);
+      IntakeMotor.stop();
 
       break;
     case 3:
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1, 1);
       Brain.Screen.print("Near Red");
-
-      MoveEn(1.5*360, 20, true);
-      Drive(-70, 2);
-      task::sleep(1000);
+      IntakeMotor.stop(brakeType::hold);
+      MoveEn(.4* 360, 20, true);
+      task::sleep(100);
+      Turn(1, 91, 20);
+      task::sleep(100);
+      Drive(-20, 2);
+      task::sleep(900);
       Drive(0, 2);
+      task::sleep(100);
+      MoveEn(2.3 * 360, 30, true);
+      task::sleep(100);
+      Turn(1, 97, 20);
+      task::sleep(100);
+      MoveEn(.4 * 360, 10, true);
+      task::sleep(100);
+      IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+      task::sleep(500);
+      IntakeMotor.stop(brakeType::hold);
+      task::sleep(100);
+      Turn(1, 150, 12);
+      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      task::sleep(100);
+      IntakeMotor.stop(brakeType::hold);
+      MoveEn(2.7 * 360, 25, true);
+      task::sleep(100);
+      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      Drive(-50, 2);
+      task::sleep(1500);
+      Drive(0, 2);
+      IntakeMotor.stop();
 
       break;
     case 4:
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1, 1);
       Brain.Screen.print("Far Blue");
 
       Drive(-20, 2);
@@ -295,8 +365,6 @@ void autonomous( void ) {
 
       break;
     case 5:
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1, 1);
       Brain.Screen.print("Far Red");
 
       Drive(-20, 2);
