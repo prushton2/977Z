@@ -398,11 +398,11 @@ void usercontrol( void ) {
       LiftMotor.stop(brakeType::brake);
     }
     if(Controller1.ButtonL1.pressing()) {
-      IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+      IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
     } else if(Controller1.ButtonL2.pressing()) {
-      IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+      IntakeMotor.spin(directionType::fwd, 100, velocityUnits::pct);
     } else {
-      IntakeMotor.stop();//brakeType::hold);
+      IntakeMotor.stop(brakeType::hold);
     }
 
     if (Controller1.ButtonRight.pressing() && developer) {
