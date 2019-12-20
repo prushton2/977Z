@@ -3,6 +3,7 @@ using namespace vex;
 extern brain Brain;
 
 // VEXcode devices
+extern inertial Gyro;
 extern pot ArmPot;
 
 /**
