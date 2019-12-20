@@ -85,6 +85,7 @@ void Turn(int dir, int angle, int speed) {
 }
 
 void liftArmTo(int height, int speed, bool CanDrive) {
+  LiftMotor.stop();
   if(height > ArmPot.angle()) {
     while(height > ArmPot.angle()) {
       LiftMotor.spin(directionType::fwd, -1*speed, velocityUnits::pct);
