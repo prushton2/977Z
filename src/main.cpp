@@ -20,6 +20,7 @@ int auton = 0;
 bool running = false;
 int ticks = 0;
 bool developer = true;
+
 void renderDisplay(int auton);
 int swap();
 
@@ -39,6 +40,21 @@ void autonomous( void ) {
 void usercontrol( void ) {
   while (1) {
     driveBot();
+    driveClaw();
+    driveArm();
+
+    if(Controller1.ButtonX.pressing()) {
+      liftArmTo(78, 15, true);
+    }
+    if(Controller1.ButtonB.pressing()) {
+      liftArmTo(72, 15, true);
+    }
+    if(Controller1.ButtonUp.pressing()) {
+      liftArmTo(75, 15, true);
+    }
+    if(Controller1.ButtonDown.pressing()) {
+      liftArmTo(68, 15, true);
+    }
   }
 }
 

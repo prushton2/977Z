@@ -19,16 +19,12 @@ void Drive(int speed, int side) {
   }
 }
 
-void driveBot() {
-  Drive(Controller1.Axis3.value()*.65, 0); Drive(Controller1.Axis2.value()*.65, 1);
 
-  if(Controller1.ButtonR1.pressing()) {
-    LiftMotor.spin(directionType::fwd, -100, velocityUnits::pct);
-  } else if(Controller1.ButtonR2.pressing()) {
-    LiftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
-  } else {
-    LiftMotor.stop(brakeType::brake);
-  }
+void driveBot() {
+  Drive(Controller1.Axis3.value()*.65, 0); 
+  Drive(Controller1.Axis2.value()*.65, 1);
+}
+void driveClaw() {
   if(Controller1.ButtonL1.pressing()) {
     IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
   } else if(Controller1.ButtonL2.pressing()) {
@@ -37,6 +33,17 @@ void driveBot() {
     IntakeMotor.stop(brakeType::hold);
   }
 }
+void driveArm() {
+  if(Controller1.ButtonR1.pressing()) {
+    LiftMotor.spin(directionType::fwd, -100, velocityUnits::pct);
+  } else if(Controller1.ButtonR2.pressing()) {
+    LiftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
+  } else {
+    LiftMotor.stop(brakeType::brake);
+  }
+}
+
+
 
 bool MoveEn(double distance, int speed, bool autocorrect) {
   LeftBack.resetRotation();
@@ -75,4 +82,28 @@ void Turn(int dir, int angle, int speed) {
     }
     Drive(0, 2);
   }
+}
+
+void liftArmTo(int height, int speed, bool CanDrive) {
+  if(height > ArmPot.angle()) {
+    while(height > ArmPot.angle()) {
+      LiftMotor.spin(directionType::fwd, -1*speed, velocityUnits::pct);
+      if(CanDrive) {
+        driveBot();
+        driveClaw();
+      }
+    }
+    return;
+  }
+  if(height < ArmPot.angle()) {
+    while(height < ArmPot.angle()) {
+      LiftMotor.spin(directionType::fwd, 1*speed, velocityUnits::pct);
+      if(CanDrive) {
+        driveBot();
+        driveClaw();
+      }
+    }
+    return;
+  }
+  LiftMotor.stop(brakeType::hold);
 }
