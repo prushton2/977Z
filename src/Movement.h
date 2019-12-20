@@ -1,3 +1,4 @@
+#include "ConfigInstances.cpp"
 class Movement {
   public:
 

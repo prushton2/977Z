@@ -10,6 +10,7 @@
 #include "vex.h"
 #include "vex_units.h"
 #include "Movement.h"
+#include "ConfigInstances.cpp"
 using namespace vex;
 
 //A global instance of vex::brain used for printing to the V5 brain screen
@@ -18,22 +19,7 @@ using namespace vex;
 // brain  Brain;
 
 // VEXcode device constructors
-vex::controller Controller1 = vex::controller();
-vex::vision Vision       = vex::vision( PORT8   );
 
-vex::motor LeftFront     = vex::motor(  PORT11,  true);
-vex::motor LeftMiddle    = vex::motor(  PORT12,  false );
-vex::motor LeftBack      = vex::motor(  PORT13,  true );
-
-vex::motor RightFront    = vex::motor(  PORT18,  false );
-vex::motor RightMiddle   = vex::motor(  PORT19,  true );
-vex::motor RightBack     = vex::motor(  PORT20,  false );
-
-vex::motor LiftMotor     = vex::motor(  PORT10,  true );
-vex::motor IntakeMotor   = vex::motor(  PORT4    );
-
-// A global instance of vex::competition
-vex::competition Competition;
 //Some sensor instances are mande in the robot-config.h file
 
 int auton = 0;
