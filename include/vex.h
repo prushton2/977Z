@@ -14,9 +14,10 @@
 
 #include "v5.h"
 #include "v5_vcs.h"
-
-
 #include "robot-config.h"
+#include "motor-config.h"
+#include "Movement.h"
+#include "autonomous.h"
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \
@@ -26,7 +27,7 @@
 #define repeat(iterations)                                                     \
   for (int iterator = 0; iterator < iterations; iterator++)
 
-#include "robot-config.h"
+
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \

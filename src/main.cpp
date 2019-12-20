@@ -9,37 +9,36 @@
 //#include "Config.cpp"
 #include "vex.h"
 #include "vex_units.h"
+#include "robot-config.h"
+#include "motor-config.h"
 #include "Movement.h"
-#include "ConfigInstances.cpp"
-using namespace vex;
+// A global instance of vex::competition
 
-//A global instance of vex::brain used for printing to the V5 brain screen
-//vex::brain       Brain;
-
-// brain  Brain;
-
-// VEXcode device constructors
-
-//Some sensor instances are mande in the robot-config.h file
+ 
 
 int auton = 0;
 bool running = false;
 int ticks = 0;
 bool developer = true;
+void renderDisplay(int auton);
+int swap();
 
 void pre_auton( void ) {
-  
+  while(true) {
+    auton = swap();
+    renderDisplay(auton);
+  }
 }
 
 void autonomous( void ) {
-
+  runAutonomous(auton);
 }
 
 
 
 void usercontrol( void ) {
   while (1) {
-    
+    driveBot();
   }
 }
 
@@ -56,4 +55,71 @@ int main() {
   //Prevent main from exiting with an infinite loop.                        
 
   vex::task::sleep(10);//Sleep the task for a short amount of time to prevent wasted resources.
+}
+
+
+void renderDisplay(int auton) {
+  Brain.Screen.setPenColor(color::blue);
+  Brain.Screen.drawLine(0, 73, 250, 73);
+  Brain.Screen.drawLine(0, 146, 250, 146);
+
+  Brain.Screen.setCursor(2, 5);//blue
+  if (auton == 0) {Brain.Screen.setPenColor(color::purple);}
+  else {Brain.Screen.setPenColor(color::white);}
+  Brain.Screen.print("No Autonomous");
+  Brain.Screen.setPenColor(color::blue);
+  Brain.Screen.setCursor(6, 5);
+  if (auton == 2) {Brain.Screen.setPenColor(color::purple);}
+  else {Brain.Screen.setPenColor(color::blue);}
+  Brain.Screen.print("Large Autonomous");
+  Brain.Screen.setCursor(10, 5);
+  if (auton == 4) {Brain.Screen.setPenColor(color::purple);}
+  else {Brain.Screen.setPenColor(color::blue);}
+  Brain.Screen.print("Small Autonomous");
+  Brain.Screen.setPenColor(color::white);
+
+  Brain.Screen.setPenColor(color::white);
+  Brain.Screen.drawLine(250, 0, 250, 250);
+  
+  Brain.Screen.setPenColor(color::red);//red
+  Brain.Screen.drawLine(250, 73, 500, 73);
+  Brain.Screen.drawLine(250, 146, 500, 146);
+  Brain.Screen.setCursor(2, 30);
+  if (auton == 1) {Brain.Screen.setPenColor(color::purple);}
+  else {Brain.Screen.setPenColor(color::white);}
+  Brain.Screen.print("Testing Autonomous");
+  Brain.Screen.setCursor(6, 30);
+  if (auton == 3) {Brain.Screen.setPenColor(color::purple);}
+  else {Brain.Screen.setPenColor(color::red);}
+  Brain.Screen.print("Large Autonomous");
+  Brain.Screen.setCursor(10, 30);
+  if (auton == 5) {Brain.Screen.setPenColor(color::purple);}
+  else {Brain.Screen.setPenColor(color::red);}
+  Brain.Screen.print("Small Autonomous");
+  Brain.Screen.setPenColor(color::white);
+}
+
+int swap() {
+  if((Brain.Screen.yPosition() < 73) && (Brain.Screen.xPosition() < 250)) {
+    auton = 0;
+  }
+  else if ((Brain.Screen.yPosition() < 73) && (Brain.Screen.xPosition() > 250)) {
+    auton = 1;
+  }
+  else if ((Brain.Screen.yPosition() > 73) && (Brain.Screen.yPosition() < 146) && (Brain.Screen.xPosition() < 250)) {
+    auton = 2;
+  }
+  else if ((Brain.Screen.yPosition() > 73) && (Brain.Screen.yPosition() < 146) && (Brain.Screen.xPosition() > 250)) {
+    auton = 3;
+  }
+  else if ((Brain.Screen.yPosition() > 73) && (Brain.Screen.xPosition() < 250)) {
+    auton = 4;
+  }
+  else if ((Brain.Screen.yPosition() > 73) && (Brain.Screen.xPosition() > 250)) {
+    auton = 5;
+  }
+  else {
+    auton = 6;
+  }
+  return auton;
 }
