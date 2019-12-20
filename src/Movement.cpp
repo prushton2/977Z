@@ -85,7 +85,9 @@ void Turn(int dir, int angle, int speed) {
 }
 
 void liftArmTo(int height, int speed, bool CanDrive) {
-  LiftMotor.stop();
+  // if(CanDrive) {
+    LiftMotor.stop();
+  // }
   if(height > ArmPot.angle()) {
     while(height > ArmPot.angle()) {
       LiftMotor.spin(directionType::fwd, -1*speed, velocityUnits::pct);
@@ -94,6 +96,7 @@ void liftArmTo(int height, int speed, bool CanDrive) {
         driveClaw();
       }
     }
+    LiftMotor.stop(brakeType::hold);
     return;
   }
   if(height < ArmPot.angle()) {
@@ -104,6 +107,7 @@ void liftArmTo(int height, int speed, bool CanDrive) {
         driveClaw();
       }
     }
+    LiftMotor.stop(brakeType::hold);
     return;
   }
   LiftMotor.stop(brakeType::hold);

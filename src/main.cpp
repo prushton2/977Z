@@ -19,7 +19,6 @@
 int auton = 0;
 bool running = false;
 int ticks = 0;
-bool developer = true;
 
 void renderDisplay(int auton);
 int swap();
@@ -103,7 +102,7 @@ void renderDisplay(int auton) {
   Brain.Screen.setCursor(2, 30);
   if (auton == 1) {Brain.Screen.setPenColor(color::purple);}
   else {Brain.Screen.setPenColor(color::white);}
-  Brain.Screen.print("Testing Autonomous");
+  Brain.Screen.print("Skills Autonomous");
   Brain.Screen.setCursor(6, 30);
   if (auton == 3) {Brain.Screen.setPenColor(color::purple);}
   else {Brain.Screen.setPenColor(color::red);}

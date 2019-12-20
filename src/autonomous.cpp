@@ -1,12 +1,15 @@
 #include "vex.h"
-
+bool developer = true;
 void runAutonomous(int autonID) {
-  switch(autonID) {
+  if(developer) {
+    Skills1();
+  } else {
+    switch(autonID) {
     case 0:
 
     break;
     case 1:
-
+      Skills1();
     break;
     case 2:
       Blue1();
@@ -15,36 +18,36 @@ void runAutonomous(int autonID) {
       Red1();
     break;
     case 4:
-
+      Blue2();
     break;
     case 5:
-
+      Red2();
     break;
+    }
   }
 }
 
 void Blue1() {
   IntakeMotor.stop(brakeType::hold);
-  MoveEn(.4* 360, 20, true);
+  MoveEn(.5* 360, 20, true);
   task::sleep(100);
   Turn(0, 91, 20);
   task::sleep(100);
   Drive(-20, 2);
-  task::sleep(900);
+  task::sleep(1000);
   Drive(0, 2);
   task::sleep(100);
   MoveEn(2.3 * 360, 30, true);
   task::sleep(100);
   Turn(0, 97, 20);
   task::sleep(100);
-  MoveEn(.6 * 360, 10, true);
+  MoveEn(.45 * 360, 10, true);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
   task::sleep(500);
   IntakeMotor.stop(brakeType::hold);
   task::sleep(100);
-  Turn(0, 150, 12);
-  // liftArmTo(4096, 10);
+  Turn(0, 153, 12);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   IntakeMotor.stop(brakeType::hold);
@@ -52,13 +55,18 @@ void Blue1() {
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, 75, velocityUnits::pct);
   Drive(-50, 2);
-  task::sleep(1500);
+  task::sleep(1000);
   Drive(0, 2);
   IntakeMotor.stop();
 }
-
+void Blue2() {
+  MoveEn(.4* 360, 20, true);
+  task::sleep(100);
+  Drive(-50, 2);
+  task::sleep(300);
+  Drive(0, 2);
+}
 void Red1() {
-  Brain.Screen.print("Near Red");
   IntakeMotor.stop(brakeType::hold);
   MoveEn(.4* 360, 20, true);
   task::sleep(100);
@@ -86,7 +94,61 @@ void Red1() {
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   Drive(-50, 2);
-  task::sleep(1500);
+  task::sleep(1000);
   Drive(0, 2);
   IntakeMotor.stop();
+}
+void Red2() {
+  MoveEn(.4* 360, 20, true);
+  task::sleep(100);
+  Drive(-50, 2);
+  task::sleep(300);
+  Drive(0, 2);
+}
+
+void Skills1() {
+  // PHASE 1 
+  // Depositing tower and large goal
+  MoveEn(.5* 360, 20, true);
+  task::sleep(100);
+  Turn(1, 90, 30);
+  Drive(-10, 0);
+  Drive(-25, 1);
+  task::sleep(1000);
+  Drive(0, 2);
+  MoveEn(2 * 360, 20, true);
+  IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
+  task::sleep(500);
+  IntakeMotor.stop(brakeType::hold);
+  Turn(1, 19, 20);
+  MoveEn(.5 * 360, 20, true); 
+  liftArmTo(72, 45, false);
+  task::sleep(100);
+  MoveEn(.7 * 360, 20, true);
+  IntakeMotor.spin(directionType::fwd, 100, velocityUnits::pct);
+  task::sleep(500);
+  IntakeMotor.stop();
+  //PHASE 2
+  //Depositing Tower
+  Turn(1, 101, 20);
+  Drive(-20, 2);
+  task::sleep(500);
+  Drive(0, 2);
+  // Turn(0, 10, 20);
+  IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
+  task::sleep(500);
+  IntakeMotor.stop();
+  liftArmTo(50, 45, false);
+  IntakeMotor.spin(directionType::fwd, 100, velocityUnits::pct);
+  task::sleep(500);
+  IntakeMotor.stop();
+
+  MoveEn(.4 * 360, 20, true);
+
+  IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
+  task::sleep(500);
+  IntakeMotor.stop();
+
+  Turn(1, 0, 20);
+  MoveEn(3.2, 20, true);
 }
