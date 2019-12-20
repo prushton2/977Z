@@ -8,16 +8,8 @@
 /*----------------------------------------------------------------------------*/
 //#include "Config.cpp"
 #include "vex.h"
-
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Gyro                 inertial      17              
-// ArmPot               pot           A               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-#include "Vision1.h"
 #include "vex_units.h"
-#include "Movement.cpp"
+#include "Movement.h"
 using namespace vex;
 
 //A global instance of vex::brain used for printing to the V5 brain screen
