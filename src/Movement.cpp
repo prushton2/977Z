@@ -48,18 +48,35 @@ void driveArm() {
 bool MoveEn(double distance, int speed, bool autocorrect) {
   LeftBack.resetRotation();
   RightBack.resetRotation();
-  while(LeftBack.rotation(rotationUnits::deg) <= distance) {
-    if (LeftBack.rotation(rotationUnits::deg) > RightBack.rotation(rotationUnits::deg) && autocorrect) {
-      Drive(speed, 0);
-      Drive(speed + (speed/3), 1);
+  if(distance > 0) {
+    while(LeftBack.rotation(rotationUnits::deg) <= distance) {
+      if (LeftBack.rotation(rotationUnits::deg) > RightBack.rotation(rotationUnits::deg) && autocorrect) {
+        Drive(speed, 0);
+        Drive(speed + (speed/3), 1);
+      }
+      else if (LeftBack.rotation(rotationUnits::deg) < RightBack.rotation(rotationUnits::deg) && autocorrect) {
+        Drive(speed + (speed/3), 0);
+        Drive(speed, 1);
+      }
+      else {
+        Drive(speed, 0);
+        Drive(speed, 1);
+      }
     }
-    else if (LeftBack.rotation(rotationUnits::deg) < RightBack.rotation(rotationUnits::deg) && autocorrect) {
-      Drive(speed + (speed/3), 0);
-      Drive(speed, 1);
-    }
-    else {
-      Drive(speed, 0);
-      Drive(speed, 1);
+  } else {
+    while(LeftBack.rotation(rotationUnits::deg) >= distance) {
+      if (LeftBack.rotation(rotationUnits::deg) < RightBack.rotation(rotationUnits::deg) && autocorrect) {
+        Drive(-1*speed, 0);
+        Drive(-1*(speed + (speed/3)), 1);
+      }
+      else if (LeftBack.rotation(rotationUnits::deg) > RightBack.rotation(rotationUnits::deg) && autocorrect) {
+        Drive(-1*(speed + (speed/3)), 0);
+        Drive(-1*speed, 1);
+      }
+      else {
+        Drive(-1*speed, 0);
+        Drive(-1*speed, 1);
+      }
     }
   }
   LeftBack.resetRotation();
@@ -111,4 +128,17 @@ void liftArmTo(int height, int speed, bool CanDrive) {
     return;
   }
   LiftMotor.stop(brakeType::hold);
+}
+
+void setClaw(bool openClaw) {
+  if(openClaw) {
+    IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+    task::sleep(1000);
+    IntakeMotor.stop();
+  }
+  if(!openClaw) {
+    IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+    task::sleep(1000);
+    IntakeMotor.stop();
+  }
 }

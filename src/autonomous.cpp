@@ -2,6 +2,7 @@
 bool developer = true;
 void runAutonomous(int autonID) {
   if(developer) {
+    // MoveEn(-1*360, 20, true);
     Skills1();
   } else {
     switch(autonID) {
@@ -130,25 +131,22 @@ void Skills1() {
   IntakeMotor.stop();
   //PHASE 2
   //Depositing Tower
-  Turn(1, 101, 20);
-  Drive(-20, 2);
-  task::sleep(500);
-  Drive(0, 2);
-  // Turn(0, 10, 20);
-  IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
-  task::sleep(500);
-  IntakeMotor.stop();
+  MoveEn(-.3 * 360, 20, true);
+  setClaw(false);
   liftArmTo(50, 45, false);
-  IntakeMotor.spin(directionType::fwd, 100, velocityUnits::pct);
-  task::sleep(500);
+  setClaw(true);
+  Turn(1, 45, 20);
+  MoveEn(.35*360, 20, true);
+  setClaw(false);
+  Turn(1, 155, 12);
+  IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+  task::sleep(100);
+  IntakeMotor.stop(brakeType::hold);
+  MoveEn(2.7 * 360, 25, true);
+  task::sleep(100);
+  IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+  Drive(-50, 2);
+  task::sleep(1000);
+  Drive(0, 2);
   IntakeMotor.stop();
-
-  MoveEn(.4 * 360, 20, true);
-
-  IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
-  task::sleep(500);
-  IntakeMotor.stop();
-
-  Turn(1, 0, 20);
-  MoveEn(3.2, 20, true);
 }
