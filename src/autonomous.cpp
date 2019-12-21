@@ -1,5 +1,5 @@
 #include "vex.h"
-bool developer = true;
+bool developer = false;
 void runAutonomous(int autonID) {
   if(developer) {
     // MoveEn(-1*360, 20, true);
