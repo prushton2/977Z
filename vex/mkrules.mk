@@ -13,7 +13,7 @@ $(BUILD)/%.o: %.cpp $(SRC_H) $(SRC_A)
 	$(Q)$(CXX) $(CXX_FLAGS) $(INC) -c -o $@ $<
 	
 # create executable 
-$(BUILD)/$(PROJECT).elf: $(OBJ)
+$(BUILD)/$(PROJECT).bdp: $(OBJ)
 	$(ECHO) "LINK $@"
 	$(Q)$(LINK) $(LNK_FLAGS) -o $@ $^ $(LIBS)
 	$(Q)$(SIZE) $@

@@ -1,3 +1,14 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// gyro                 inertial      17              
+// ArmPot               pot           A               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// gyro                 inertial      17              
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -66,6 +77,7 @@ int main() {
   Competition.autonomous( autonomous );
   Competition.drivercontrol( usercontrol );
   //render();
+
   pre_auton();
   //Prevent main from exiting with an infinite loop.                        
 
