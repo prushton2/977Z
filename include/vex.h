@@ -14,9 +14,20 @@
 
 #include "v5.h"
 #include "v5_vcs.h"
-
-
 #include "robot-config.h"
+#include "motor-config.h"
+#include "Movement.h"
+#include "autonomous.h"
+
+#define waitUntil(condition)                                                   \
+  do {                                                                         \
+    wait(5, msec);                                                             \
+  } while (!(condition))
+
+#define repeat(iterations)                                                     \
+  for (int iterator = 0; iterator < iterations; iterator++)
+
+
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \
