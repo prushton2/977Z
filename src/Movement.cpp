@@ -101,6 +101,61 @@ void Turn(int dir, int angle, int speed) {
   }
 }
 
+bool isBetween(int val, int lim1, int lim2) {
+  if((val >= lim1 && val <= lim2) || (val <= lim1 && val >= lim2)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void GyroTurn(int angle, int speed) {
+  bool finished = false;
+  Gyro.setRotation(0, degrees);
+  if(angle < 0) {
+    while(!finished) {
+      inertial::quaternion  Inertial_quaternion;
+      if(angle < Gyro.rotation(degrees)) {
+        Drive(speed, 0);
+        Drive(-1*speed, 1);
+        Brain.Screen.clearLine(1);
+        Brain.Screen.print(Gyro.rotation(degrees));
+      } else if(angle-1 > Gyro.rotation(degrees)) {
+        Drive(-2, 0);
+        Drive(2, 1);
+        Brain.Screen.clearLine(1);
+        Brain.Screen.print(Gyro.rotation(degrees));
+      } else {
+        finished = true;
+      }
+    }
+  }
+
+  if(angle > 0) {
+    while(!finished) {
+      inertial::quaternion  Inertial_quaternion;
+      if(angle > Gyro.rotation(degrees)) {
+        Drive(-1*speed, 0);
+        Drive(speed, 1);
+        Brain.Screen.clearLine(1);
+        Brain.Screen.print(Gyro.rotation(degrees));
+      } else if(angle+1 < Gyro.rotation(degrees)) {
+        Drive(2, 0);
+        Drive(-2, 1);
+        Brain.Screen.clearLine(1);
+        Brain.Screen.print(Gyro.rotation(degrees));
+      } else {
+        finished = true;
+      }
+    }
+  }
+  Drive(0, 2);
+  Gyro.setRotation(0, degrees);
+  Brain.Screen.clearLine(1);
+  Brain.Screen.print(Gyro.rotation(degrees));
+
+}
+
 void liftArmTo(int height, int speed, bool CanDrive) {
   // if(CanDrive) {
     LiftMotor.stop();

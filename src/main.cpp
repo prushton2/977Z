@@ -35,9 +35,18 @@ void renderDisplay(int auton);
 int swap();
 
 void pre_auton( void ) {
+  inertial::quaternion  Inertial_quaternion;
+  Gyro.calibrate();
+  while(Gyro.isCalibrating()) {
+    Brain.Screen.setCursor(1, 1);
+    Brain.Screen.print("Calibrating Gyro");
+    task::sleep(100);
+  }
+  Brain.Screen.clearScreen();
   while(true) {
     auton = swap();
     renderDisplay(auton);
+    
   }
 }
 
@@ -52,7 +61,9 @@ void usercontrol( void ) {
     driveBot();
     driveClaw();
     driveArm();
-
+    if(Controller1.ButtonA.pressing()) {
+      Gyro.calibrate();
+    }
     if(Controller1.ButtonX.pressing()) {
       liftArmTo(78, 15, true);
     }

@@ -8,7 +8,7 @@ using code = vision::code;
 brain  Brain;
 
 // VEXcode device constructors
-inertial gyro = inertial(PORT17);
+inertial Gyro = inertial(PORT17);
 pot ArmPot = pot(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions

@@ -1,9 +1,8 @@
 #include "vex.h"
-bool developer = false;
+bool developer = true;
 void runAutonomous(int autonID) {
   if(developer) {
-    // MoveEn(-1*360, 20, true);
-    Skills1();
+    Red1();
   } else {
     switch(autonID) {
     case 0:
@@ -69,11 +68,12 @@ void Blue2() {
 }
 void Red1() {
   IntakeMotor.stop(brakeType::hold);
-  MoveEn(.4* 360, 20, true);
+  LiftMotor.stop(brakeType::hold);
+  MoveEn(.48* 360, 20, true);
   task::sleep(100);
   Turn(1, 91, 20);
   task::sleep(100);
-  Drive(-20, 2);
+  Drive(-30, 2);
   task::sleep(900);
   Drive(0, 2);
   task::sleep(100);
@@ -81,13 +81,12 @@ void Red1() {
   task::sleep(100);
   Turn(1, 97, 20);
   task::sleep(100);
-  MoveEn(.6 * 360, 10, true);
+  MoveEn(.34 * 360, 10, true);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
-  task::sleep(500);
+  task::sleep(600);
   IntakeMotor.stop(brakeType::hold);
-  task::sleep(100);
-  Turn(1, 150, 12);
+  Turn(1, 152, 12);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   IntakeMotor.stop(brakeType::hold);
