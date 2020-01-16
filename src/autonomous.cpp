@@ -2,7 +2,7 @@
 bool developer = true;
 void runAutonomous(int autonID) {
   if(developer) {
-    Blue1();
+    Red1();
   } else {
     switch(autonID) {
     case 0:
@@ -36,12 +36,12 @@ void Blue1() {
   Turn(0, 91, 20);
   task::sleep(100);
   Drive(-30, 2);
-  task::sleep(900);
+  task::sleep(500);
   Drive(0, 2);
   task::sleep(100);
   MoveEn(2.6 * 360, 30, true);
   task::sleep(100);
-  GyroTurn(-90, 10);
+  GyroTurn(-90, 15);
   task::sleep(100);
   LiftMotor.spin(directionType::fwd, 10, velocityUnits::pct);
   MoveEn(.33 * 360, 10, true);
@@ -53,7 +53,7 @@ void Blue1() {
   task::sleep(600);
   LiftMotor.stop(brakeType::hold);
   IntakeMotor.stop(brakeType::hold);
-  GyroTurn(-120, 10);
+  GyroTurn(-120, 15);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   IntakeMotor.stop(brakeType::hold);
@@ -82,12 +82,12 @@ void Red1() {
   Turn(1, 91, 20);
   task::sleep(100);
   Drive(-30, 2);
-  task::sleep(900);
+  task::sleep(500);
   Drive(0, 2);
   task::sleep(100);
   MoveEn(2.7 * 360, 30, true);
   task::sleep(100);
-  GyroTurn(90, 10);
+  GyroTurn(90, 15);
   task::sleep(100);
   LiftMotor.spin(directionType::fwd, 10, velocityUnits::pct);
   MoveEn(.33 * 360, 10, true);
@@ -99,7 +99,7 @@ void Red1() {
   task::sleep(600);
   LiftMotor.stop(brakeType::hold);
   IntakeMotor.stop(brakeType::hold);
-  GyroTurn(120, 10);
+  GyroTurn(120, 15);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   IntakeMotor.stop(brakeType::hold);
