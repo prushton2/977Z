@@ -36,7 +36,7 @@ void Blue1() {
   Turn(0, 91, 20);
   task::sleep(100);
   Drive(-30, 2);
-  task::sleep(500);
+  task::sleep(700);
   Drive(0, 2);
   task::sleep(100);
   MoveEn(2.6 * 360, 30, true);
@@ -44,7 +44,7 @@ void Blue1() {
   GyroTurn(-90, 15);
   task::sleep(100);
   LiftMotor.spin(directionType::fwd, 10, velocityUnits::pct);
-  MoveEn(.26 * 360, 10, true);
+  MoveEn(.24 * 360, 10, true);
   LiftMotor.stop(brakeType::hold);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
@@ -82,7 +82,7 @@ void Red1() {
   Turn(1, 91, 20);
   task::sleep(100);
   Drive(-30, 2);
-  task::sleep(500);
+  task::sleep(700);
   Drive(0, 2);
   task::sleep(100);
   MoveEn(2.7 * 360, 30, true);
