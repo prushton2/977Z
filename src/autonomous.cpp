@@ -2,7 +2,7 @@
 bool developer = true;
 void runAutonomous(int autonID) {
   if(developer) {
-    Red1();
+    Blue1();
   } else {
     switch(autonID) {
     case 0:
@@ -44,7 +44,7 @@ void Blue1() {
   GyroTurn(-90, 15);
   task::sleep(100);
   LiftMotor.spin(directionType::fwd, 10, velocityUnits::pct);
-  MoveEn(.33 * 360, 10, true);
+  MoveEn(.26 * 360, 10, true);
   LiftMotor.stop(brakeType::hold);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
@@ -60,7 +60,7 @@ void Blue1() {
   MoveEn(3 * 360, 25, true);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
-  task::sleep(200);
+  task::sleep(300);
   Drive(-50, 2);
   task::sleep(1000);
   Drive(0, 2);
