@@ -30,7 +30,7 @@ void driveClaw() {
   } else if(Controller1.ButtonL2.pressing()) {
     IntakeMotor.spin(directionType::fwd, 100, velocityUnits::pct);
   } else {
-    IntakeMotor.stop(brakeType::hold);
+    IntakeMotor.stop(brakeType::brake);
   }
 }
 void driveArm() {
@@ -39,7 +39,7 @@ void driveArm() {
   } else if(Controller1.ButtonR2.pressing()) {
     LiftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
   } else {
-    LiftMotor.stop(brakeType::brake);
+    LiftMotor.stop(brakeType::hold);
   }
 }
 
@@ -110,49 +110,37 @@ bool isBetween(int val, int lim1, int lim2) {
 }
 
 void GyroTurn(int angle, int speed) {
-  bool finished = false;
+  inertial::quaternion  Inertial_quaternion;
   Gyro.setRotation(0, degrees);
-  if(angle < 0) {
-    while(!finished) {
-      inertial::quaternion  Inertial_quaternion;
-      if(angle < Gyro.rotation(degrees)) {
-        Drive(speed, 0);
-        Drive(-1*speed, 1);
-        Brain.Screen.clearLine(1);
-        Brain.Screen.print(Gyro.rotation(degrees));
-      } else if(angle-1 > Gyro.rotation(degrees)) {
-        Drive(-2, 0);
-        Drive(2, 1);
-        Brain.Screen.clearLine(1);
-        Brain.Screen.print(Gyro.rotation(degrees));
-      } else {
-        finished = true;
-      }
-    }
-  }
-
+  // bool hasrun = false;
   if(angle > 0) {
-    while(!finished) {
-      inertial::quaternion  Inertial_quaternion;
-      if(angle > Gyro.rotation(degrees)) {
-        Drive(-1*speed, 0);
-        Drive(speed, 1);
-        Brain.Screen.clearLine(1);
-        Brain.Screen.print(Gyro.rotation(degrees));
-      } else if(angle+1 < Gyro.rotation(degrees)) {
-        Drive(2, 0);
-        Drive(-2, 1);
-        Brain.Screen.clearLine(1);
-        Brain.Screen.print(Gyro.rotation(degrees));
-      } else {
-        finished = true;
-      }
+    while(Gyro.rotation(degrees) < angle) {
+      Drive(speed, 0);
+      Drive(-1*speed, 1);
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print(Gyro.heading(degrees));
+      Brain.Screen.print(", ");
+      Brain.Screen.print(angle);
+      // hasrun = true;
+    }
+    Drive(0, 2);
+  } else {
+    while(Gyro.rotation(degrees) > angle) {
+      Drive(-1*speed, 0);
+      Drive(speed, 1);
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print(Gyro.heading(degrees));
+      Brain.Screen.print(", ");
+      Brain.Screen.print(angle);
     }
   }
   Drive(0, 2);
-  Gyro.setRotation(0, degrees);
+
+  // Gyro.setRotation(0, degrees);
   Brain.Screen.clearLine(1);
-  Brain.Screen.print(Gyro.rotation(degrees));
+  Brain.Screen.print(Gyro.heading(degrees));
 
 }
 
