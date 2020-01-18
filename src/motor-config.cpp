@@ -12,5 +12,5 @@ using namespace vex;
   vex::motor RightBack     = vex::motor(  PORT20,  false );
 
   vex::motor LiftMotor     = vex::motor(  PORT3,   true  );
-  vex::motor IntakeMotor   = vex::motor(  PORT2,   false );
+  vex::motor IntakeMotor   = vex::motor(  PORT4,   false );
   vex::competition Competition;

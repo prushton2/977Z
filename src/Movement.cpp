@@ -30,7 +30,7 @@ void driveClaw() {
   } else if(Controller1.ButtonL2.pressing()) {
     IntakeMotor.spin(directionType::fwd, 100, velocityUnits::pct);
   } else {
-    IntakeMotor.stop(brakeType::brake);
+    IntakeMotor.stop(brakeType::hold);
   }
 }
 void driveArm() {
@@ -39,7 +39,7 @@ void driveArm() {
   } else if(Controller1.ButtonR2.pressing()) {
     LiftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
   } else {
-    LiftMotor.stop(brakeType::hold);
+    LiftMotor.stop(brakeType::brake);
   }
 }
 
