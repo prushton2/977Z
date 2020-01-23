@@ -2,8 +2,7 @@
 bool developer = false;
 void runAutonomous(int autonID) {
   if(developer) {
-    // MoveEn(-1*360, 20, true);
-    Skills1();
+    autonID = 1;
   } else {
     switch(autonID) {
     case 0:
@@ -30,31 +29,37 @@ void runAutonomous(int autonID) {
 
 void Blue1() {
   IntakeMotor.stop(brakeType::hold);
-  MoveEn(.5* 360, 20, true);
+  LiftMotor.stop(brakeType::hold);
+  MoveEn(.48* 360, 20, true);
   task::sleep(100);
+  // MoveEn(-.3*360, 10, true);
   Turn(0, 91, 20);
   task::sleep(100);
-  Drive(-20, 2);
-  task::sleep(1000);
+  Drive(-30, 2);
+  task::sleep(700);
   Drive(0, 2);
   task::sleep(100);
-  MoveEn(2.3 * 360, 30, true);
+  MoveEn(2.6 * 360, 30, true);
   task::sleep(100);
-  Turn(0, 97, 20);
+  GyroTurn(-90, 15);
   task::sleep(100);
-  MoveEn(.45 * 360, 10, true);
+  LiftMotor.spin(directionType::fwd, 10, velocityUnits::pct);
+  MoveEn(.24 * 360, 10, true);
+  LiftMotor.stop(brakeType::hold);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
-  task::sleep(500);
+  LiftMotor.spin(directionType::fwd, -20, velocityUnits::pct);
+  task::sleep(600);
+  LiftMotor.stop(brakeType::hold);
   IntakeMotor.stop(brakeType::hold);
-  task::sleep(100);
-  Turn(0, 153, 12);
+  GyroTurn(-120, 15);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   IntakeMotor.stop(brakeType::hold);
-  MoveEn(2.7 * 360, 25, true);
+  MoveEn(3 * 360, 25, true);
   task::sleep(100);
-  IntakeMotor.spin(directionType::fwd, 75, velocityUnits::pct);
+  IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+  task::sleep(300);
   Drive(-50, 2);
   task::sleep(1000);
   Drive(0, 2);
@@ -69,31 +74,36 @@ void Blue2() {
 }
 void Red1() {
   IntakeMotor.stop(brakeType::hold);
-  MoveEn(.4* 360, 20, true);
+  LiftMotor.stop(brakeType::hold);
+  MoveEn(.48* 360, 20, true);
   task::sleep(100);
   Turn(1, 91, 20);
   task::sleep(100);
-  Drive(-20, 2);
-  task::sleep(900);
+  Drive(-30, 2);
+  task::sleep(700);
   Drive(0, 2);
   task::sleep(100);
-  MoveEn(2.3 * 360, 30, true);
+  MoveEn(2.7 * 360, 30, true);
   task::sleep(100);
-  Turn(1, 97, 20);
+  GyroTurn(90, 15);
   task::sleep(100);
-  MoveEn(.6 * 360, 10, true);
+  LiftMotor.spin(directionType::fwd, 10, velocityUnits::pct);
+  MoveEn(.33 * 360, 10, true);
+  LiftMotor.stop(brakeType::hold);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, -100, velocityUnits::pct);
-  task::sleep(500);
+  LiftMotor.spin(directionType::fwd, -20, velocityUnits::pct);
+  task::sleep(600);
+  LiftMotor.stop(brakeType::hold);
   IntakeMotor.stop(brakeType::hold);
-  task::sleep(100);
-  Turn(1, 150, 12);
+  GyroTurn(120, 15);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   IntakeMotor.stop(brakeType::hold);
-  MoveEn(2.7 * 360, 25, true);
+  MoveEn(3 * 360, 25, true);
   task::sleep(100);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
+  task::sleep(200);
   Drive(-50, 2);
   task::sleep(1000);
   Drive(0, 2);

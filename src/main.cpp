@@ -35,9 +35,30 @@ void renderDisplay(int auton);
 int swap();
 
 void pre_auton( void ) {
-  while(true) {
+  Controller1.Screen.setCursor(1, 1);
+  Controller1.Screen.clearLine(1);
+  Controller1.Screen.print("Starting...");
+  inertial::quaternion  Inertial_quaternion;
+  Gyro.calibrate();
+  
+  Brain.Screen.setCursor(1, 1);
+  Brain.Screen.print("Calibrating Gyro");
+
+  Controller1.Screen.setCursor(1, 1);
+  Controller1.Screen.print("Calibrating Gyro");
+
+  while(Gyro.isCalibrating()) {
+    task::sleep(100);
+  }
+
+  Brain.Screen.clearLine();
+  Controller1.Screen.clearLine(1);
+  Controller1.Screen.setCursor(1, 1);
+  Controller1.Screen.print("Gyro Calibrated");
+  while(!Competition.isEnabled()) {
     auton = swap();
     renderDisplay(auton);
+    
   }
 }
 
@@ -48,11 +69,14 @@ void autonomous( void ) {
 
 
 void usercontrol( void ) {
+  // Red1();
   while (1) {
     driveBot();
     driveClaw();
     driveArm();
-
+    if(Controller1.ButtonA.pressing()) {
+      
+    }
     if(Controller1.ButtonX.pressing()) {
       liftArmTo(78, 15, true);
     }

@@ -101,6 +101,49 @@ void Turn(int dir, int angle, int speed) {
   }
 }
 
+bool isBetween(int val, int lim1, int lim2) {
+  if((val >= lim1 && val <= lim2) || (val <= lim1 && val >= lim2)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void GyroTurn(int angle, int speed) {
+  inertial::quaternion  Inertial_quaternion;
+  Gyro.setRotation(0, degrees);
+  // bool hasrun = false;
+  if(angle > 0) {
+    while(Gyro.rotation(degrees) < angle) {
+      Drive(speed, 0);
+      Drive(-1*speed, 1);
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print(Gyro.heading(degrees));
+      Brain.Screen.print(", ");
+      Brain.Screen.print(angle);
+      // hasrun = true;
+    }
+    Drive(0, 2);
+  } else {
+    while(Gyro.rotation(degrees) > angle) {
+      Drive(-1*speed, 0);
+      Drive(speed, 1);
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print(Gyro.heading(degrees));
+      Brain.Screen.print(", ");
+      Brain.Screen.print(angle);
+    }
+  }
+  Drive(0, 2);
+
+  // Gyro.setRotation(0, degrees);
+  Brain.Screen.clearLine(1);
+  Brain.Screen.print(Gyro.heading(degrees));
+
+}
+
 void liftArmTo(int height, int speed, bool CanDrive) {
   // if(CanDrive) {
     LiftMotor.stop();
