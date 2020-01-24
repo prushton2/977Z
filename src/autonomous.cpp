@@ -143,17 +143,20 @@ void Skills1() {
   task::sleep(600);
   // LiftMotor.stop(brakeType::hold);
   IntakeMotor.stop(brakeType::hold);
-  GyroTurn(125, 15);
+  GyroTurn(123, 15);
   // IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
   task::sleep(100);
   // IntakeMotor.stop(brakeType::hold);
-  MoveEn(3.2 * 360, 25, true);
-  task::sleep(200);
+  MoveEn(3.1 * 360, 25, true);
+  task::sleep(500);
   IntakeMotor.spin(directionType::fwd, 50, velocityUnits::pct);
-  MoveEn(-1.2 * 360, 20, true);
-  while(Gyro.heading(degrees) < 180) {
-    Drive(-15, 0);
-    Drive(15, 1);
-  }
+  MoveEn(-.55 * 360, 20, true);
+
+  Drive(-10, 0);
+  Drive(10, 1);
+  while(Gyro.heading(degrees) > 178) {}
   Drive(0, 2);
+  MoveEn(1 * 360, 15, true);
+  IntakeMotor.spin(directionType::fwd, -50, velocityUnits::pct);
+  
 }
