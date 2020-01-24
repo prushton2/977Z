@@ -51,10 +51,8 @@ void pre_auton( void ) {
     task::sleep(100);
   }
 
-  Brain.Screen.clearLine();
+  Brain.Screen.clearLine(1);
   Controller1.Screen.clearLine(1);
-  Controller1.Screen.setCursor(1, 1);
-  Controller1.Screen.print("Gyro Calibrated");
   while(!Competition.isEnabled()) {
     auton = swap();
     renderDisplay(auton);
@@ -71,6 +69,7 @@ void autonomous( void ) {
 void usercontrol( void ) {
   // Red1();
   while (1) {
+    Controller1.Screen.print(IntakeMotor.temperature(temperatureUnits::celsius));    
     driveBot();
     driveClaw();
     driveArm();
@@ -89,6 +88,7 @@ void usercontrol( void ) {
     if(Controller1.ButtonDown.pressing()) {
       liftArmTo(68, 15, true);
     }
+    task::sleep(10);
   }
 }
 
