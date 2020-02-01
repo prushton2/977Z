@@ -110,6 +110,7 @@ int main() {
 
 
 void renderDisplay(int auton) {
+  // if(developer) {}
   Brain.Screen.setPenColor(color::blue);
   Brain.Screen.drawLine(0, 73, 250, 73);
   Brain.Screen.drawLine(0, 146, 250, 146);
