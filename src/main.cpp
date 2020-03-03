@@ -22,7 +22,6 @@
 #include "vex_units.h"
 #include "robot-config.h"
 #include "motor-config.h"
-#include "Movement.h"
 // A global instance of vex::competition
 
  
@@ -30,6 +29,8 @@
 int auton = 0;
 bool running = false;
 int ticks = 0;
+
+Drivetrain driver;
 
 void renderDisplay(int auton);
 int swap();
@@ -61,7 +62,6 @@ void pre_auton( void ) {
 }
 
 void autonomous( void ) {
-  runAutonomous(auton);
 }
 
 
@@ -70,25 +70,11 @@ void usercontrol( void ) {
   // Red1();
   while (1) {
     Controller1.Screen.print(IntakeMotor.temperature(temperatureUnits::celsius));    
-    driveBot();
-    driveClaw();
-    driveArm();
+    driver.Drive(Controller1.Axis3.value()*.65, 0); 
+    driver.Drive(Controller1.Axis2.value()*.65, 1);
     if(Controller1.ButtonA.pressing()) {
-      
-    }
-    if(Controller1.ButtonX.pressing()) {
-      liftArmTo(78, 15, true);
-    }
-    if(Controller1.ButtonB.pressing()) {
-      liftArmTo(72, 15, true);
-    }
-    if(Controller1.ButtonUp.pressing()) {
-      liftArmTo(75, 15, true);
-    }
-    if(Controller1.ButtonDown.pressing()) {
-      liftArmTo(68, 15, true);
-    }
     task::sleep(10);
+    }
   }
 }
 
