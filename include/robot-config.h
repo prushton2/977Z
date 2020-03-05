@@ -4,7 +4,7 @@ extern brain Brain;
 
 // VEXcode devices
 extern inertial Gyro;
-extern pot ArmPot;
+extern pot LiftPot;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

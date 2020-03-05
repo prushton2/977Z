@@ -1,6 +1,12 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// Gyro                 inertial      17              
+// LiftPot              pot           A               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
 // gyro                 inertial      17              
 // ArmPot               pot           A               
 // ---- END VEXCODE CONFIGURED DEVICES ----
@@ -31,7 +37,7 @@ bool running = false;
 int ticks = 0;
 
 Drivetrain driver;
-Mech mech;
+Mech mech(0, 100); //The first integer is the lower limit of the lift, the second integer is the upper limit of the lift.
 
 void renderDisplay(int auton);
 int swap();
@@ -77,9 +83,7 @@ void usercontrol( void ) {
       (Controller1.ButtonR1.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing R1
       (Controller1.ButtonR2.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing R2
 
-    mech.dLift( //This drives the lift. If both buttons are pressed at the same time, nothing happens
-      (Controller1.ButtonR1.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing R1
-      (Controller1.ButtonR2.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing R2
+
 
   }
 }

@@ -3,7 +3,9 @@
 
 class Mech {
   public:
-    Mech();
+    int upperLimit;
+    int lowerLimit;
+    Mech(int upperLimitP, int lowerLimitP);
     void dLift(int speed);
     void dIntake(int speed);
 };

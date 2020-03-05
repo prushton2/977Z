@@ -9,7 +9,7 @@ brain  Brain;
 
 // VEXcode device constructors
 inertial Gyro = inertial(PORT17);
-pot ArmPot = pot(Brain.ThreeWirePort.A);
+pot LiftPot = pot(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions
 
