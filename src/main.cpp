@@ -69,12 +69,8 @@ void autonomous( void ) {
 void usercontrol( void ) {
   // Red1();
   while (1) {
-    Controller1.Screen.print(IntakeMotor.temperature(temperatureUnits::celsius));    
-    driver.Drive(Controller1.Axis3.value()*.65, 0); 
-    driver.Drive(Controller1.Axis2.value()*.65, 1);
-    if(Controller1.ButtonA.pressing()) {
-    task::sleep(10);
-    }
+    driver.Drive(Controller1.Axis3.value(), 0);
+    driver.Drive(Controller1.Axis2.value(), 1);
   }
 }
 
@@ -90,7 +86,7 @@ int main() {
 
   pre_auton();
   //Prevent main from exiting with an infinite loop.                        
-
+  
   vex::task::sleep(10);//Sleep the task for a short amount of time to prevent wasted resources.
 }
 
