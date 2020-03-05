@@ -83,7 +83,13 @@ void usercontrol( void ) {
       (Controller1.ButtonR1.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing R1
       (Controller1.ButtonR2.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing R2
 
+    mech.dIntake( //This drives the intake. If both buttons are pressed at the same time, nothing happens
+      (Controller1.ButtonL1.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing L1
+      (Controller1.ButtonL2.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing L2
 
+    mech.dTilter( //This drives the intake. If both buttons are pressed at the same time, nothing happens
+      (Controller1.ButtonX.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing L1
+      (Controller1.ButtonB.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing L2
 
   }
 }
