@@ -2,11 +2,11 @@
 using namespace vex;
   vex::controller Controller1 = vex::controller();
 
-  vex::motor LeftFront         = vex::motor(  PORT9,  true  );
-  vex::motor LeftBack          = vex::motor(  PORT8,  true  );
+  vex::motor LeftFront         = vex::motor(  PORT9,  false  );
+  vex::motor LeftBack          = vex::motor(  PORT8,  false  );
 
-  vex::motor RightFront        = vex::motor(  PORT1,  false );
-  vex::motor RightBack         = vex::motor(  PORT2,  false );
+  vex::motor RightFront        = vex::motor(  PORT1,  true );
+  vex::motor RightBack         = vex::motor(  PORT2,  true );
 
   vex::motor LiftMotor         = vex::motor(  PORT10,  true  );
   vex::motor Tilter            = vex::motor(  PORT7,   false );
