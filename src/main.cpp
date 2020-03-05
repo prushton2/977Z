@@ -31,6 +31,7 @@ bool running = false;
 int ticks = 0;
 
 Drivetrain driver;
+Mech mech;
 
 void renderDisplay(int auton);
 int swap();
@@ -71,6 +72,15 @@ void usercontrol( void ) {
   while (1) {
     driver.Drive(Controller1.Axis3.value(), 0);
     driver.Drive(Controller1.Axis2.value(), 1);
+
+    mech.dLift( //This drives the lift. If both buttons are pressed at the same time, nothing happens
+      (Controller1.ButtonR1.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing R1
+      (Controller1.ButtonR2.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing R2
+
+    mech.dLift( //This drives the lift. If both buttons are pressed at the same time, nothing happens
+      (Controller1.ButtonR1.pressing() ? 60 : 0) + //The number in front of the colon is the move speed when pressing R1
+      (Controller1.ButtonR2.pressing() ? -60 : 0) ); //The number in front of the colon is the move speed when pressing R2
+
   }
 }
 
