@@ -60,3 +60,38 @@ void Drivetrain::MoveEn(double distance, int speed, bool autocorrect) {
   RightBack.resetRotation();
   Drive(0, 2);
 }
+
+void Drivetrain::GyroTurn(int angle, int speed) {
+  inertial::quaternion  Inertial_quaternion;
+  Gyro.setRotation(0, degrees);
+  // bool hasrun = false;
+  if(angle > 0) {
+    while(Gyro.rotation(degrees) < angle) {
+      Drive(speed, 0);
+      Drive(-1*speed, 1);
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print(Gyro.heading(degrees));
+      Brain.Screen.print(", ");
+      Brain.Screen.print(angle);
+      // hasrun = true;
+    }
+    Drive(0, 2);
+  } else {
+    while(Gyro.rotation(degrees) > angle) {
+      Drive(-1*speed, 0);
+      Drive(speed, 1);
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print(Gyro.heading(degrees));
+      Brain.Screen.print(", ");
+      Brain.Screen.print(angle);
+    }
+  }
+  Drive(0, 2);
+
+  // Gyro.setRotation(0, degrees);
+  Brain.Screen.clearLine(1);
+  Brain.Screen.print(Gyro.heading(degrees));
+
+}

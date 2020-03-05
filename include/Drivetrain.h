@@ -6,6 +6,8 @@ class Drivetrain {
     Drivetrain();
     void Drive(int speed, int side);
     void MoveEn(double distance, int speed, bool autocorrect);
+    void GyroTurn(int angle, int speed);
+    
 };
 
 #endif
