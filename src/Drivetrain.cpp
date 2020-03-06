@@ -18,6 +18,7 @@ void Drivetrain::Drive(int speed, int side) {
 
       RightFront.spin(directionType::fwd, speed, velocityUnits::pct);
       RightBack.spin(directionType::fwd, speed, velocityUnits::pct); 
+    break;
   }
 }
 
