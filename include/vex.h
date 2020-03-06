@@ -14,10 +14,12 @@
 
 #include "v5.h"
 #include "v5_vcs.h"
+
 #include "robot-config.h"
 #include "motor-config.h"
 #include "Drivetrain.h"
 #include "Mech.h"
+#include "Auton.h"
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \
