@@ -5,15 +5,15 @@ using namespace vex;
   vex::motor LeftFront         = vex::motor(  PORT9,  false  );
   vex::motor LeftBack          = vex::motor(  PORT8,  false  );
 
-  vex::motor RightFront        = vex::motor(  PORT1,  true );
-  vex::motor RightBack         = vex::motor(  PORT2,  true );
+  vex::motor RightFront        = vex::motor(  PORT1,  true   );
+  vex::motor RightBack         = vex::motor(  PORT2,  true   );
 
-  vex::motor LiftMotor         = vex::motor(  PORT10,  true  );
-  vex::motor Tilter            = vex::motor(  PORT7,   false );
+  vex::motor LiftMotor         = vex::motor(  PORT10, true   );
+  vex::motor Tilter            = vex::motor(  PORT7,  false  );
 
-  vex::motor LeftIntakeMotor   = vex::motor(  PORT20,   false );
-  vex::motor RightIntakeMotor  = vex::motor(  PORT11,   true  );
-
+  vex::motor LeftIntakeMotor   = vex::motor(  PORT20, true   );
+  vex::motor RightIntakeMotor  = vex::motor(  PORT11, true   );
+ 
   vex::competition Competition;
 
 //DEAD PORTS: 1, 2, 4, 5, 7, 8, 9, 10 [Irrelevant]
