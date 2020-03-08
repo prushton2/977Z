@@ -2,7 +2,10 @@
 
 Auton::Auton() {};
 
-void Auton::AutonStart() {};
+void Auton::AutonStart() {
+  //Raise lift to full height
+  //Outtake
+};
 
 void Auton::BluePrep() {};
 void Auton::BlueSmall() {};
@@ -14,4 +17,4 @@ void Auton::RedLarge() {};
 
 void Auton::Init() {
 
-};
+};};
