@@ -1,20 +1,3 @@
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Gyro                 inertial      17              
-// LiftPot              pot           A               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// gyro                 inertial      17              
-// ArmPot               pot           A               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// gyro                 inertial      17              
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -38,13 +21,25 @@ Mech mech(0, 100); //The first integer is the lower limit of the lift, the secon
 Auton auton;
 UI ui;
 
-
+bool developer = false;
 
 void pre_auton( void ) {
-  Controller1.Screen.setCursor(1, 1);
   while(!Competition.isEnabled()) {
-    ui.swap();
-    ui.renderDisplay();
+    if(Controller1.ButtonRight.pressing()) {
+      developer = true;
+    } 
+    if(Controller1.ButtonLeft.pressing()) {
+      developer = false;
+    }
+
+    if(developer) {
+      Controller1.Screen.print("Developer Mode Is On");
+      auton.auton = "No";
+    } else {
+      Controller1.Screen.clearLine(0);
+      ui.swap();
+      ui.renderDisplay();
+    }
   }
 }
 

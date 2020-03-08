@@ -2,8 +2,6 @@
 
 Auton::Auton() {};
 
-void Auton::Init() {};
-
 void Auton::AutonStart() {};
 
 void Auton::BluePrep() {};
@@ -12,3 +10,8 @@ void Auton::BlueLarge() {};
 void Auton::RedPrep() {};
 void Auton::RedSmall() {};
 void Auton::RedLarge() {};
+
+
+void Auton::Init() {
+
+};

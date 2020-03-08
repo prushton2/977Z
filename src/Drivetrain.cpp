@@ -28,6 +28,9 @@ void Drivetrain::MoveEn(double distance, int speed, bool autocorrect) {
   RightBack.resetRotation();
   if(distance > 0) {
     while(LeftBack.rotation(rotationUnits::deg) <= distance) {
+      if(LeftBack.rotation(rotationUnits::deg) > distance*.75) {
+        speed -= speed*.01;
+      }
       if (LeftBack.rotation(rotationUnits::deg) > RightBack.rotation(rotationUnits::deg) && autocorrect) {
         Drive(speed, 0);
         Drive(speed + (speed/3), 1);
@@ -43,6 +46,9 @@ void Drivetrain::MoveEn(double distance, int speed, bool autocorrect) {
     }
   } else {
     while(LeftBack.rotation(rotationUnits::deg) >= distance) {
+      if(LeftBack.rotation(rotationUnits::deg) > -1*distance*.75) {
+        speed -= speed*.01;
+      }
       if (LeftBack.rotation(rotationUnits::deg) < RightBack.rotation(rotationUnits::deg) && autocorrect) {
         Drive(-1*speed, 0);
         Drive(-1*(speed + (speed/3)), 1);

@@ -17,8 +17,8 @@
 
 #include "robot-config.h"
 #include "motor-config.h"
-#include "Drivetrain.h"
 #include "Mech.h"
+#include "Drivetrain.h"
 #include "Auton.h"
 #include "UI.h"
 
