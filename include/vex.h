@@ -20,6 +20,7 @@
 #include "Drivetrain.h"
 #include "Mech.h"
 #include "Auton.h"
+#include "UI.h"
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \

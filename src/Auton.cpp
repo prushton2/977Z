@@ -1,6 +1,11 @@
 #include "vex.h"
 
 Auton::Auton() {};
+
+void Auton::Init() {};
+
+void Auton::AutonStart() {};
+
 void Auton::BluePrep() {};
 void Auton::BlueSmall() {};
 void Auton::BlueLarge() {};
