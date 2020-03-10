@@ -65,3 +65,6 @@ void Mech::Deploy() {
 
       while(Controller1.ButtonY.pressing()) {} //Wait until button upressed
 }
+
+//1709 ticks hi
+//2088 ticks lo
