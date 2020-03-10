@@ -9,6 +9,7 @@ class Mech {
     void dLift(int speed);
     void dIntake(int speed);
     void dTilter(int speed);
+    void Deploy();
 
 };
 

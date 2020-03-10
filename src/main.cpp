@@ -17,7 +17,7 @@ bool running = false;
 int ticks = 0;
 
 Drivetrain driver;
-Mech mech(0, 100); //The first integer is the lower limit of the lift, the second integer is the upper limit of the lift. This is temporarily disabled because it doesnt work
+Mech mech(75, 33); //The first integer is the lower limit of the lift, the second integer is the upper limit of the lift. This is temporarily disabled because it doesnt work
 Auton auton;
 UI ui;
 
@@ -52,6 +52,7 @@ void autonomous( void ) {
 
 void usercontrol( void ) {
   while (1) {
+
     driver.Drive(Controller1.Axis3.value(), 0);
     driver.Drive(Controller1.Axis2.value(), 1);
 
@@ -66,6 +67,10 @@ void usercontrol( void ) {
     mech.dTilter( //This drives the intake. If both buttons are pressed at the same time, nothing happens
       (Controller1.ButtonX.pressing() ? -60 : 0) + //The number in front of the colon is the move speed when pressing L1
       (Controller1.ButtonB.pressing() ? 60 : 0) ); //The number in front of the colon is the move speed when pressing L2
+
+    while(Controller1.ButtonY.pressing()) {
+      mech.Deploy();
+    }
   }
 }
 

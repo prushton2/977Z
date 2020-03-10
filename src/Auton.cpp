@@ -1,20 +1,34 @@
 #include "vex.h"
+#include "Drivetrain.h"
+#include "Mech.h"
 
-Auton::Auton() {};
+Auton::Auton() {
+  Drivetrain driver;
+  Mech mech(75, 33);
+};
 
 void Auton::AutonStart() {
   //Raise lift to full height
   //Outtake
 };
 
-void Auton::BluePrep() {};
-void Auton::BlueSmall() {};
-void Auton::BlueLarge() {};
-void Auton::RedPrep() {};
-void Auton::RedSmall() {};
-void Auton::RedLarge() {};
+void Auton::BluePrep() {
+  Init();
+};
+void Auton::BlueSmall() {}; //No
+void Auton::BlueLarge() {
+  Init();
+};
+
+void Auton::RedPrep() {
+  Init();
+};
+void Auton::RedSmall() {}; //No
+void Auton::RedLarge() {
+  Init();
+};
 
 
 void Auton::Init() {
 
-};};
+};
