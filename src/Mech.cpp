@@ -36,35 +36,44 @@ void Mech::dTilter(int speed) {
 
 void Mech::Deploy() {
   while(Tilter.rotation(degrees) > -1400) {
-        dTilter(-60);
+      dTilter(-60);
+      if(!Controller1.ButtonY.pressing()) {
+        return;
       }
-      dTilter(0);
-      task::sleep(500);
-      while(Tilter.rotation(degrees) < -10) {
-        dTilter(60);
+    }
+    dTilter(0);
+    task::sleep(500);
+    while(Tilter.rotation(degrees) < -10) {
+      dTilter(60);
+      if(!Controller1.ButtonY.pressing()) {
+        return;
       }
-      dTilter(0);
-      task::sleep(800);
-      dIntake(35);
-      int speed = -15;
-      LeftFront.spin(directionType::fwd, speed, velocityUnits::pct);
-      LeftBack.spin(directionType::fwd, speed, velocityUnits::pct);
+    }
+    dTilter(0);
+    task::sleep(800);
+    dIntake(35);
+    int speed = -15;
+    LeftFront.spin(directionType::fwd, speed, velocityUnits::pct);
+    LeftBack.spin(directionType::fwd, speed, velocityUnits::pct);
 
-      RightFront.spin(directionType::fwd, speed, velocityUnits::pct);
-      RightBack.spin(directionType::fwd, speed, velocityUnits::pct); 
+    RightFront.spin(directionType::fwd, speed, velocityUnits::pct);
+    RightBack.spin(directionType::fwd, speed, velocityUnits::pct); 
 
-      task::sleep(750);
+    task::sleep(750);
 
-      dIntake(0);
-      speed = 0;
-      LeftFront.spin(directionType::fwd, speed, velocityUnits::pct);
-      LeftBack.spin(directionType::fwd, speed, velocityUnits::pct);
+    dIntake(0);
+    speed = 0;
+    LeftFront.spin(directionType::fwd, speed, velocityUnits::pct);
+    LeftBack.spin(directionType::fwd, speed, velocityUnits::pct);
 
-      RightFront.spin(directionType::fwd, speed, velocityUnits::pct);
-      RightBack.spin(directionType::fwd, speed, velocityUnits::pct); 
+    RightFront.spin(directionType::fwd, speed, velocityUnits::pct);
+    RightBack.spin(directionType::fwd, speed, velocityUnits::pct); 
 
-      while(Controller1.ButtonY.pressing()) {} //Wait until button upressed
+    while(Controller1.ButtonY.pressing()) {} //Wait until button upressed
 }
 
+void RaiseToDescore(std::string height) {
+
+}
 //1709 ticks hi
 //2088 ticks lo
