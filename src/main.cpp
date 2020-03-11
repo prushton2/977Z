@@ -8,6 +8,7 @@
 /*----------------------------------------------------------------------------*/
 //#include "Config.cpp"
 #include "vex.h"
+#include "vex_thread.h"
 #include "vex_units.h"
 #include "robot-config.h"
 #include "motor-config.h"
@@ -15,9 +16,12 @@
 
 bool running = false;
 int ticks = 0;
+void RaiseToHigh();
+void RaiseToLow();
+
 
 Drivetrain driver;
-Mech mech(75, 33); //The first integer is the lower limit of the lift, the second integer is the upper limit of the lift. This is temporarily disabled because it doesnt work
+Mech mech(60, 20); //The first integer is the lower limit of the lift, the second integer is the upper limit of the lift. This is temporarily disabled because it doesnt work
 Auton auton;
 UI ui;
 
@@ -34,7 +38,7 @@ void pre_auton( void ) {
 
     if(developer) {
       Controller1.Screen.print("Developer Mode Is On");
-      auton.auton = "No";
+      auton.autonId = "No";
     } else {
       Controller1.Screen.clearLine(0);
       ui.swap();
@@ -44,14 +48,19 @@ void pre_auton( void ) {
 }
 
 void autonomous( void ) {
-  auton.auton = ui.auton;
+  auton.autonId = ui.auton;
   auton.Init();
 }
 
 
 
 void usercontrol( void ) {
+  LiftMotor.resetRotation();
   while (1) {
+
+    Brain.Screen.clearScreen();
+    Brain.Screen.newLine();
+    Brain.Screen.print(-Tilter.rotation(degrees));
 
     driver.Drive(Controller1.Axis3.value(), 0);
     driver.Drive(Controller1.Axis2.value(), 1);
@@ -72,6 +81,10 @@ void usercontrol( void ) {
       mech.Deploy();
     }
 
+    if(Controller1.ButtonDown.pressing()) {
+      auton.Init();
+      while(Controller1.ButtonDown.pressing()) {}
+    }
     
   }
 }
@@ -93,3 +106,10 @@ int main() {
 }
 
 
+void RaiseToLow() {
+  mech.RaiseToLow();
+}
+
+void RaiseToHigh() {
+  mech.RaiseToHigh();
+}

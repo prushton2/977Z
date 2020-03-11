@@ -10,7 +10,8 @@ class Mech {
     void dIntake(int speed);
     void dTilter(int speed);
     void Deploy();
-    void RaiseToDescore(std::string height);
+    void RaiseToHigh();
+    void RaiseToLow();
 };
 
 #endif

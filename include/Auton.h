@@ -3,7 +3,8 @@
 
 class Auton {
   public:
-    std::string auton;
+    std::string autonId;
+    
     Auton();
 
     void Init();
